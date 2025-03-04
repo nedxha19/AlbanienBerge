@@ -5,13 +5,7 @@ const USERNAME = 'admin';
 const PASSWORD = 'secret';
 
 export async function GET({ params }) {
-    const authHeader = request.headers.get('authorization');
-    if (!authHeader || !isValidCredentials(authHeader)) {
-        return new Response('Unauthorized', {
-            status: 401,
-            headers: { 'WWW-Authenticate': 'Basic realm="Secure Area"' }
-        });
-    }
+
 
     const connection = await createConnection();
     const [rows] = await connection.execute('SELECT * FROM mountains WHERE id = ?', [params.uuid]);
